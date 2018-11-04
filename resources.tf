@@ -39,3 +39,21 @@ resource "aws_subnet" "subnet3" {
     Name = "Subnet3"
   }
 }
+
+resource "aws_security_group" "demo-security-group"{
+    vpc_id = "${aws_vpc.demo.id}"
+    name = "Demo Security Group"
+
+    ingress {
+        cidr_blocks = [
+            "${aws_vpc.demo.cidr_block}"
+        ]
+        from_port = 80
+        to_port = 80
+        protocol = "tcp"
+    }
+
+    tags {
+        Name = "Demo Security Group"
+    }
+}
